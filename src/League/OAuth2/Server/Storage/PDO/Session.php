@@ -11,7 +11,7 @@ class Session implements SessionInterface
         $db = \ezcDbInstance::get();
 
         $stmt = $db->prepare('INSERT INTO oauth_sessions (client_id, owner_type,  owner_id) VALUES
-         (:clientId, :ownerType, :ownerId) RETURNING ID');
+         (:clientId, :ownerType, :ownerId) RETURNING id');
         $stmt->bindValue(':clientId', $clientId);
         $stmt->bindValue(':ownerType', $ownerType);
         $stmt->bindValue(':ownerId', $ownerId);
