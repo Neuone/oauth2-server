@@ -170,12 +170,10 @@ class Session implements SessionInterface
     {
         $db = \ezcDbInstance::get();
 
-        $stmt = $db->prepare('INSERT INTO oauth_session_authcode_scopes (oauth_session_authcode_id, scope_id) VALUES (:authCodeId, :scopeId) RETURNING id');
+        $stmt = $db->prepare('INSERT INTO oauth_session_authcode_scopes (oauth_session_authcode_id, scope_id) VALUES (:authCodeId, :scopeId)');
         $stmt->bindValue(':authCodeId', $authCodeId);
         $stmt->bindValue(':scopeId', $scopeId);
         $stmt->execute();
-        $resultObj = $stmt->fetchObject();
-        return $resultObj->id;
     }
 
     public function getAuthCodeScopes($oauthSessionAuthCodeId)
