@@ -65,14 +65,12 @@ class Session implements SessionInterface
         $db = \ezcDbInstance::get();
 
         $stmt = $db->prepare('INSERT INTO oauth_session_refresh_tokens (session_access_token_id, refresh_token, refresh_token_expires, client_id) VALUES
-         (:accessTokenId, :refreshToken, :expireTime, :clientId) RETURNING id');
+         (:accessTokenId, :refreshToken, :expireTime, :clientId)');
         $stmt->bindValue(':accessTokenId', $accessTokenId);
         $stmt->bindValue(':refreshToken', $refreshToken);
         $stmt->bindValue(':expireTime', $expireTime);
         $stmt->bindValue(':clientId', $clientId);
         $stmt->execute();
-        $resultObj = $stmt->fetchObject();
-        return $resultObj->id;
     }
 
     public function associateAuthCode($sessionId, $authCode, $expireTime)
